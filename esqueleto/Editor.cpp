@@ -1,55 +1,49 @@
 #include "Editor.h"
-#include <iostream>
-
+#include "iostream"
 using std::string;
-typedef set<string> strset;
+
 
 Editor::Editor(const set<string> & conectivos) {
-    for (auto it = conectivos.begin(); it != conectivos.end(); it++){
-        _conectivos.insert(*it);
-        }
-    _palabras_totales = 0;
-    _longitud = 0;
+    this->_editor = {};
+    this->_conectivos = conectivos;
+    this->_vocabulario = {};
+    this -> _apariciones = {};
+    this->_longitud = 0;
+    this->_conteo_palabras = 0;
+    
 }
 
-vector<string> Editor::oracion_a_palabras(const string& oracion) {
-    vector<string> vector_palabras = {};
-    string temporal = "";
-    string char_actual; 
-    for(int i = 0; i < oracion.length()+1;i++){
-        char_actual = oracion[i];
-        if(char_actual == " "){
-            vector_palabras.push_back(temporal);
-            temporal = "";
-        }
-        else{
-            temporal.push_back(oracion[i]);
-        }
+bool Editor::es_conectivo(string palabra){
+    bool res = false;
+    if(this->_conectivos.find(palabra) != this->_conectivos.end()){
+        res = true;
     }
-    vector_palabras.push_back(temporal);
-    return vector_palabras;
-} 
-
-
+    return res;
+}
 
 string Editor::texto() const {
-    string str = "";
-    for(int i = 0; i<this->_longitud; i++){
-        str = str + this->_editor[i] + " ";
+    string res = "";
+    for (int i = 0; i < this->_longitud; i++){
+        if(i < _longitud-1){
+        res.append(this->_editor[i]);
+        res.append(" ");}
+        else{
+            res.append(this->_editor[i]);
+        }
     }
-    return str;
+    return res;
 }
 
 const set<string>& Editor::vocabulario() const {
-    return this->_vocabulario;
+    return _vocabulario;
 }
 
 const set<string>& Editor::conectivos() const {
-    return this->_conectivos;
+    return _conectivos;
 }
 
 int Editor::conteo_palabras() const { 
-	return _palabras_totales; 
+	return _conteo_palabras; 
 }
 
 int Editor::longitud() const { 
@@ -57,40 +51,43 @@ int Editor::longitud() const {
 }
 
 void Editor::agregar_atras(const string& oracion) {
-
-    vector<string> palabras = oracion_a_palabras(oracion);
-
-    for(int i = 0; i < palabras.size(); i++){
-            if (this->_conectivos.find(palabras[i]) == this->_conectivos.end()){
-                this->_palabras_totales++;
-                this->_vocabulario.insert(palabras[i]);
-            }
-            this->_editor.push_back(palabras[i]);
+    string temporal = "";
+    int i = 0;
+    while( i < oracion.size()){
+        if(oracion[i] == ' '){
+             if(!(es_conectivo(temporal))){
+                this->_conteo_palabras++;
+                this->_vocabulario.insert(temporal);
+                this->_apariciones[temporal].insert(_longitud);
+            } 
             this->_longitud++;
+            this->_editor.push_back(temporal);
+            temporal = "";
+        }
+        else{
+            temporal.push_back(oracion[i]);
+        }
+        i++;
     }
+    if(!(es_conectivo(temporal))){
+                this->_conteo_palabras++;
+                this->_vocabulario.insert(temporal);
+                this->_apariciones[temporal].insert(_longitud);
+            }
+            this->_longitud++;
+            this->_editor.push_back(temporal); 
 }
 
 const set<int> & Editor::buscar_palabra(const string& palabra) const {
-    set<int> apariciones = {};
-    for(int i = 0; i < this->_editor.size(); i++){
-        if (this->_editor[i] == palabra){
-            apariciones.insert(i);
-        }
-    }
-    return apariciones;
+    return this->_apariciones.find(palabra)->second;
 }
 
 void Editor::insertar_palabras(const string& oracion, int pos) {
-    vector<string> palabras = oracion_a_palabras(oracion);
-    auto it = this->_editor.begin();
-    for (int i = 0; i < palabras.size(); i++){
-        it = this->_editor.begin() + pos + i;
-        this->_editor.insert(it, palabras[i]);
-    }
+    /* Completar */
 }
 
 void Editor::borrar_posicion(int pos) {
-    /* Completar */ 
+    /* Completar */
 }
 
 int Editor::borrar_palabra(const string& palabra) {
@@ -100,12 +97,4 @@ int Editor::borrar_palabra(const string& palabra) {
 
 void Editor::reemplazar_palabra(const string& palabra1, const string& palabra2) {
     /* Completar */
-}
-
-int main(){
-    Editor e({});
-    e.agregar_atras("Hola me llamo Juan, se llama Jaime");
-    cout << e.texto() << endl;
-    e.insertar_palabras("el vecino de mi amigo", 4);
-    cout << e.texto() << endl;
 }

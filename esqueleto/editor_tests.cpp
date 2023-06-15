@@ -17,7 +17,7 @@ TEST(editor_tests, test_vacio) {
 TEST(editor_tests, test_texto) {
     Editor e({});
     e.agregar_atras("el vecino es mi amigo");
-
+    
     ASSERT_EQ(e.texto(), "el vecino es mi amigo");
 }
 

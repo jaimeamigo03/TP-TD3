@@ -4,6 +4,7 @@
 #include <set>
 #include <string>
 #include <vector>
+#include <map>
 /* agregar includes que sean necesarios */
 
 using namespace std;
@@ -49,8 +50,6 @@ public:
     //const vector<string> & oracion_a_palabras(const string& oracion) ;
 
 private:
-    /* Completar */
-    // conjuntos vacíos para devolver por referncia
 
     vector<string> _editor;
 
@@ -58,13 +57,18 @@ private:
 
     set<string> _vocabulario;
 
-    int _palabras_totales;  
+    map<string,set<int>> _apariciones;
 
     int _longitud;
 
+    int _conteo_palabras;
+
     //Funciones auxiliares
-    vector<string> oracion_a_palabras(const string& oracion);
+    //vector<string> oracion_a_palabras(const string& oracion);
     bool es_conectivo(string palabra);
+    const set<int> set_int_vacio;
+    const set<string> set_string_vacio;
+    
     
 };
 

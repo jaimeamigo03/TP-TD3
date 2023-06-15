@@ -6,26 +6,26 @@
 	CompilerName="/usr/bin/g++"
 	CompilerVersion="11.3.0"
 	OSName="Linux"
-	Hostname="cd36e3a241a7"
-	OSRelease="5.15.90.1-microsoft-standard-WSL2"
-	OSVersion="#1 SMP Fri Jan 27 02:56:13 UTC 2023"
+	Hostname="560838ac9d94"
+	OSRelease="5.10.16.3-microsoft-standard-WSL2"
+	OSVersion="#1 SMP Fri Apr 2 22:23:49 UTC 2021"
 	OSPlatform="x86_64"
 	Is64Bits="1"
-	VendorString="AuthenticAMD"
-	VendorID="Advanced Micro Devices"
-	FamilyID="23"
-	ModelID="113"
-	ProcessorCacheSize="512"
-	NumberOfLogicalCPU="12"
-	NumberOfPhysicalCPU="6"
-	TotalVirtualMemory="2048"
-	TotalPhysicalMemory="7919"
+	VendorString="GenuineIntel"
+	VendorID="Intel Corporation"
+	FamilyID="6"
+	ModelID="142"
+	ProcessorCacheSize="6144"
+	NumberOfLogicalCPU="8"
+	NumberOfPhysicalCPU="4"
+	TotalVirtualMemory="4096"
+	TotalPhysicalMemory="12612"
 	LogicalProcessorsPerPhysical="2"
-	ProcessorClockFrequency="3800"
+	ProcessorClockFrequency="2112.01"
 	>
 	<Testing>
-		<StartDateTime>Jun 15 13:44 UTC</StartDateTime>
-		<StartTestTime>1686836641</StartTestTime>
+		<StartDateTime>Jun 15 21:51 UTC</StartDateTime>
+		<StartTestTime>1686865892</StartTestTime>
 		<TestList>
 			<Test>./editor_tests.reemplazar_no_conectivo_por_conectivo</Test>
 		</TestList>
@@ -36,13 +36,13 @@
 			<FullCommandLine>/workspaces/TP-TD3/esqueleto/build/editor_tests "--gtest_filter=editor_tests.reemplazar_no_conectivo_por_conectivo" "--gtest_also_run_disabled_tests"</FullCommandLine>
 			<Results>
 				<NamedMeasurement type="text/string" name="Exit Code">
-					<Value>SEGFAULT</Value>
+					<Value>Failed</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="text/string" name="Exit Value">
-					<Value>0</Value>
+					<Value>1</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="numeric/double" name="Execution Time">
-					<Value>0.0435942</Value>
+					<Value>0.0356625</Value>
 				</NamedMeasurement>
 				<NamedMeasurement type="numeric/double" name="Processors">
 					<Value>1</Value>
@@ -57,12 +57,12 @@
 					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
 				</NamedMeasurement>
 				<Measurement>
-					<Value encoding="base64" compression="gzip">eJydjzFrwzAQhXf/ihvbwRalWyBbIVsoxp2MEYp8MSLynSqdUsivj+0EYzrmTffuPh736kzkaIDROHp7h3PkEdQfx0sKxmJSzXfZfH0qTL8ZPQqrU3a+V7rHkNTAPExLTFKmaDdWLXae9BxcWVscWXAHhwWBZrrA2XnBCHvA3glHPeOpiohj8OZmoibWlgmtuCvrMBGrK9r9qg7qZ4cPkCV37vCcU3aCVdGWqzo4eD4Z/7gjXV1kGpEmFqXM4R+8zdz+WbRQ/xxhUfdKgzuCe4UP====</Value>
+					<Value encoding="base64" compression="gzip">eJylkU1rwkAQhu/7K+ZooEmUVigBD4IfFIqIpvQgEjbJqEs3u+t+aNtf340RMYWWYuc0s/Pyzj4zCycEE1uoKBOdADZaVhAfpX4zihZo4nQepqP7GM3eIUcr49wxXsZZicrEWym3/hGNDY0ursr4VNZZVhtHRUFm0mIC05MEUt+BDeMWNQwAS2alzmq5iTRipTj9pDoTMiukwMKyg8yUV1wqshpcYg2LM0MP7Mm3ZjjnxjGLEVmFl1jDlMuc8qaP4sC0FBUKr0UbOvVNfO15/U+ygsXLDE6xvoXg1yW3/Aqlkl7/IYEJZdxpJON35U2wBNw7ypn9ALkBu0ODcKDcoUkIAEZ+lkU/lnKaa2o6Aak/+7pjxQ6YSaDX9w+PHgQmw6fn8eg2EOh0oTLB37bWiMFKS3lA/nYWi1SHpTyK9tF/OjZoKqL2HE84Hy6XDWEXGrg2d+NwB5yZerE5cnlM/rsaQrzv2SAdL1PyBZCTKA0=</Value>
 				</Measurement>
 			</Results>
 		</Test>
-		<EndDateTime>Jun 15 13:44 UTC</EndDateTime>
-		<EndTestTime>1686836641</EndTestTime>
+		<EndDateTime>Jun 15 21:51 UTC</EndDateTime>
+		<EndTestTime>1686865892</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>
