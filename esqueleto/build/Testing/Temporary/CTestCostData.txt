@@ -1,0 +1,19 @@
+editor_tests_NOT_BUILT 0 0
+editor_tests.test_vacio 2 0.031473
+editor_tests.test_texto 0 0
+editor_tests.test_conteo_palabras_longitud 0 0
+editor_tests.test_buscar 0 0
+editor_tests.test_vocabulario 0 0
+editor_tests.test_insertar 0 0
+editor_tests.test_insertar_y_luego_buscar 0 0
+editor_tests.test_borrar_posicion 0 0
+editor_tests.test_borrar_posicion_y_buscar 0 0
+editor_tests.borrar_palabra 0 0
+editor_tests.borrar_palabra_y_buscar 0 0
+editor_tests.borrar_conectivo 0 0
+editor_tests.reemplazar_palabra 0 0
+editor_tests.reemplazar_conectivo_por_conectivo 0 0
+editor_tests.reemplazar_conectivo_por_no_conectivo 0 0
+editor_tests.reemplazar_no_conectivo_por_conectivo 0 0
+---
+editor_tests.reemplazar_no_conectivo_por_conectivo

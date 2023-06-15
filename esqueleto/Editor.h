@@ -45,6 +45,9 @@ public:
     // reemplaza una palabra por otra    
     void reemplazar_palabra(const string& palabra, const string& reemplazo);    // O(log M + P * log(P))
 
+    //Funciones auxiliares
+    //const vector<string> & oracion_a_palabras(const string& oracion) ;
+
 private:
     /* Completar */
     // conjuntos vacíos para devolver por referncia

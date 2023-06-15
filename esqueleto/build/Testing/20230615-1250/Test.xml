@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="Linux-g++"
+	BuildStamp="20230615-1250-Experimental"
+	Name="be822d32ecd0"
+	Generator="ctest-3.22.1"
+	CompilerName="/usr/bin/g++"
+	CompilerVersion="11.3.0"
+	OSName="Linux"
+	Hostname="cd36e3a241a7"
+	OSRelease="5.15.90.1-microsoft-standard-WSL2"
+	OSVersion="#1 SMP Fri Jan 27 02:56:13 UTC 2023"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="AuthenticAMD"
+	VendorID="Advanced Micro Devices"
+	FamilyID="23"
+	ModelID="113"
+	ProcessorCacheSize="512"
+	NumberOfLogicalCPU="12"
+	NumberOfPhysicalCPU="6"
+	TotalVirtualMemory="2048"
+	TotalPhysicalMemory="7919"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="3800"
+	>
+	<Testing>
+		<StartDateTime>Jun 15 13:44 UTC</StartDateTime>
+		<StartTestTime>1686836641</StartTestTime>
+		<TestList>
+			<Test>./editor_tests.reemplazar_no_conectivo_por_conectivo</Test>
+		</TestList>
+		<Test Status="failed">
+			<Name>editor_tests.reemplazar_no_conectivo_por_conectivo</Name>
+			<Path>.</Path>
+			<FullName>./editor_tests.reemplazar_no_conectivo_por_conectivo</FullName>
+			<FullCommandLine>/workspaces/TP-TD3/esqueleto/build/editor_tests "--gtest_filter=editor_tests.reemplazar_no_conectivo_por_conectivo" "--gtest_also_run_disabled_tests"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="text/string" name="Exit Code">
+					<Value>SEGFAULT</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Exit Value">
+					<Value>0</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.0435942</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/workspaces/TP-TD3/esqueleto/build/editor_tests "--gtest_filter=editor_tests.reemplazar_no_conectivo_por_conectivo" "--gtest_also_run_disabled_tests"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJydjzFrwzAQhXf/ihvbwRalWyBbIVsoxp2MEYp8MSLynSqdUsivj+0EYzrmTffuPh736kzkaIDROHp7h3PkEdQfx0sKxmJSzXfZfH0qTL8ZPQqrU3a+V7rHkNTAPExLTFKmaDdWLXae9BxcWVscWXAHhwWBZrrA2XnBCHvA3glHPeOpiohj8OZmoibWlgmtuCvrMBGrK9r9qg7qZ4cPkCV37vCcU3aCVdGWqzo4eD4Z/7gjXV1kGpEmFqXM4R+8zdz+WbRQ/xxhUfdKgzuCe4UP====</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Jun 15 13:44 UTC</EndDateTime>
+		<EndTestTime>1686836641</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

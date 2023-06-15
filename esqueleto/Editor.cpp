@@ -12,6 +12,24 @@ Editor::Editor(const set<string> & conectivos) {
     _longitud = 0;
 }
 
+ const vector<string> oracion_a_palabras(const string& oracion) {
+    vector<string> vector_palabras = {};
+    string temporal = "";
+    string char_actual; 
+    for(int i = 0; i < oracion.length()+1;i++){
+        char_actual = oracion[i];
+        if(char_actual == " "){
+            vector_palabras.push_back(temporal);
+            temporal = "";
+        }
+        else{
+            temporal.push_back(oracion[i]);
+        }
+    }
+    vector_palabras.push_back(temporal);
+    return vector_palabras;
+} 
+
 string Editor::texto() const {
     string str = "";
     for(int i = 0; i<this->_longitud; i++){
@@ -25,9 +43,6 @@ const set<string>& Editor::vocabulario() const {
 }
 
 const set<string>& Editor::conectivos() const {
-    for (auto it = _conectivos.begin(); it != _conectivos.end(); ++it){
-        cout << ' ' << *it;
-        }
     return this->_conectivos;
 }
 
@@ -40,22 +55,16 @@ int Editor::longitud() const {
 }
 
 void Editor::agregar_atras(const string& oracion) {
-    string temporal = "";
-    string temp2;
-    for(int i = 0; i < oracion.length()+1;i++){
-        temp2 = oracion[i];
-        if(temp2 == " "){
-            this->_editor.push_back(temporal);
-            this->_longitud++;
-            if (this->_conectivos.find(temporal) == this->_conectivos.end()){
+
+    vector<string> palabras = oracion_a_palabras(oracion);
+
+    for(int i = 0; i < palabras.size(); i++){
+            if (this->_conectivos.find(palabras[i]) == this->_conectivos.end()){
                 this->_palabras_totales++;
-                this->_vocabulario.insert(temporal);
+                this->_vocabulario.insert(palabras[i]);
             }
-            temporal = "";
-        }
-        else{
-            temporal.push_back(oracion[i]);
-        }
+            this->_editor.push_back(palabras[i]);
+            this->_longitud++;
     }
 }
 
@@ -70,7 +79,12 @@ const set<int> & Editor::buscar_palabra(const string& palabra) const {
 }
 
 void Editor::insertar_palabras(const string& oracion, int pos) {
-    
+    vector<string> palabras = oracion_a_palabras(oracion);
+    auto it = this->_editor.begin();
+    for (int i = 0; i < palabras.size(); i++){
+        it = this->_editor.begin() + pos + i;
+        this->_editor.insert(it, palabras[i]);
+    }
 }
 
 void Editor::borrar_posicion(int pos) {
@@ -88,6 +102,8 @@ void Editor::reemplazar_palabra(const string& palabra1, const string& palabra2) 
 
 int main(){
     Editor e({});
-    e.agregar_atras("el vecino es mi amigo");
+    e.agregar_atras("Hola me llamo Juan, se llama Jaime");
+    cout << e.texto() << endl;
+    e.insertar_palabras("el vecino de mi amigo", 4);
     cout << e.texto() << endl;
 }
