@@ -3,6 +3,7 @@
 
 #include <set>
 #include <string>
+#include <vector>
 /* agregar includes que sean necesarios */
 
 using namespace std;
@@ -47,8 +48,16 @@ public:
 private:
     /* Completar */
     // conjuntos vacíos para devolver por referncia
-    const set<int> set_int_vacio;
-    const set<string> set_string_vacio;
+
+    vector<string> _editor;
+
+    set<string> _conectivos;
+
+    set<string> _vocabulario;
+
+    int _palabras_totales;  
+
+    int _longitud;
     
 };
 

@@ -1,51 +1,80 @@
 #include "Editor.h"
+#include <iostream>
 
 using std::string;
+typedef set<string> strset;
 
 Editor::Editor(const set<string> & conectivos) {
-    /* Completar */
+    for (auto it = conectivos.begin(); it != conectivos.end(); it++){
+        _conectivos.insert(*it);
+        }
+    _palabras_totales = 0;
+    _longitud = 0;
 }
 
 string Editor::texto() const {
-    /* Quitar este código y completar */
-    return "";
+    string str = "";
+    for(int i = 0; i<this->_longitud; i++){
+        str = str + this->_editor[i] + " ";
+    }
+    return str;
 }
 
 const set<string>& Editor::vocabulario() const {
-    /* Quitar este código y completar */
-    return set_string_vacio;
+    return this->_vocabulario;
 }
 
 const set<string>& Editor::conectivos() const {
-    /* Quitar este código y completar */
-    return set_string_vacio;
+    for (auto it = _conectivos.begin(); it != _conectivos.end(); ++it){
+        cout << ' ' << *it;
+        }
+    return this->_conectivos;
 }
 
 int Editor::conteo_palabras() const { 
-    /* Quitar este código y completar */
-	return 0; 
+	return _palabras_totales; 
 }
 
 int Editor::longitud() const { 
-    /* Quitar este código y completar */
-	return 0; 
+	return _longitud; 
 }
 
 void Editor::agregar_atras(const string& oracion) {
-    /* Completar */
+    string temporal = "";
+    string temp2;
+    for(int i = 0; i < oracion.length()+1;i++){
+        temp2 = oracion[i];
+        if(temp2 == " "){
+            this->_editor.push_back(temporal);
+            this->_longitud++;
+            if (this->_conectivos.find(temporal) == this->_conectivos.end()){
+                this->_palabras_totales++;
+                this->_vocabulario.insert(temporal);
+            }
+            temporal = "";
+        }
+        else{
+            temporal.push_back(oracion[i]);
+        }
+    }
 }
 
 const set<int> & Editor::buscar_palabra(const string& palabra) const {
-    /* Quitar este código y completar */
-    return set_int_vacio;
+    set<int> apariciones = {};
+    for(int i = 0; i < this->_editor.size(); i++){
+        if (this->_editor[i] == palabra){
+            apariciones.insert(i);
+        }
+    }
+    return apariciones;
 }
 
 void Editor::insertar_palabras(const string& oracion, int pos) {
-    /* Completar */
+    
 }
 
 void Editor::borrar_posicion(int pos) {
-    /* Completar */
+    /* Completar */ 
 }
 
 int Editor::borrar_palabra(const string& palabra) {
@@ -55,4 +84,10 @@ int Editor::borrar_palabra(const string& palabra) {
 
 void Editor::reemplazar_palabra(const string& palabra1, const string& palabra2) {
     /* Completar */
+}
+
+int main(){
+    Editor e({});
+    e.agregar_atras("el vecino es mi amigo");
+    cout << e.texto() << endl;
 }
