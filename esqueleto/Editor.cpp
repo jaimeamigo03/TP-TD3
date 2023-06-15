@@ -12,7 +12,7 @@ Editor::Editor(const set<string> & conectivos) {
     _longitud = 0;
 }
 
- const vector<string> oracion_a_palabras(const string& oracion) {
+vector<string> Editor::oracion_a_palabras(const string& oracion) {
     vector<string> vector_palabras = {};
     string temporal = "";
     string char_actual; 
@@ -29,6 +29,8 @@ Editor::Editor(const set<string> & conectivos) {
     vector_palabras.push_back(temporal);
     return vector_palabras;
 } 
+
+
 
 string Editor::texto() const {
     string str = "";

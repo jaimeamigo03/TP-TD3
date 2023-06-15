@@ -61,6 +61,10 @@ private:
     int _palabras_totales;  
 
     int _longitud;
+
+    //Funciones auxiliares
+    vector<string> oracion_a_palabras(const string& oracion);
+    bool es_conectivo(string palabra);
     
 };
 
