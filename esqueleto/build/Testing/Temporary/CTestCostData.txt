@@ -1,19 +1,18 @@
 editor_tests_NOT_BUILT 0 0
-editor_tests.test_vacio 14 0.0370762
-editor_tests.test_texto 12 0.0398006
-editor_tests.test_conteo_palabras_longitud 9 0.0358154
-editor_tests.test_buscar 7 0.0328296
-editor_tests.test_vocabulario 10 0.0415509
-editor_tests.test_insertar 5 0.0329631
-editor_tests.test_insertar_y_luego_buscar 4 0.0290095
-editor_tests.test_borrar_posicion 3 0.0345253
-editor_tests.test_borrar_posicion_y_buscar 2 0.0333594
-editor_tests.borrar_palabra 0 0
-editor_tests.borrar_palabra_y_buscar 0 0
-editor_tests.borrar_conectivo 9 0.0499189
-editor_tests.reemplazar_palabra 0 0
-editor_tests.reemplazar_conectivo_por_conectivo 10 0.0399794
-editor_tests.reemplazar_conectivo_por_no_conectivo 0 0
-editor_tests.reemplazar_no_conectivo_por_conectivo 0 0
+editor_tests.test_vacio 21 0.0355869
+editor_tests.test_texto 19 0.0388343
+editor_tests.test_conteo_palabras_longitud 16 0.0348
+editor_tests.test_buscar 13 0.0328159
+editor_tests.test_vocabulario 17 0.0372286
+editor_tests.test_insertar 12 0.0332977
+editor_tests.test_insertar_y_luego_buscar 7 0.0306044
+editor_tests.test_borrar_posicion 10 0.034508
+editor_tests.test_borrar_posicion_y_buscar 8 0.0339737
+editor_tests.borrar_palabra 2 0.0335182
+editor_tests.borrar_palabra_y_buscar 2 0.0336317
+editor_tests.borrar_conectivo 16 0.0423673
+editor_tests.reemplazar_palabra 6 0.0357267
+editor_tests.reemplazar_conectivo_por_conectivo 17 0.0378964
+editor_tests.reemplazar_conectivo_por_no_conectivo 2 0.0371235
+editor_tests.reemplazar_no_conectivo_por_conectivo 2 0.0323688
 ---
-editor_tests.reemplazar_no_conectivo_por_conectivo
