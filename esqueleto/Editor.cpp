@@ -8,9 +8,7 @@ Editor::Editor(const set<string> & conectivos) {
     this->_conectivos = conectivos;
     this->_vocabulario = {};
     this -> _apariciones = {};
-    this->_longitud = 0;
-    this->_conteo_palabras = 0;
-    
+    this->_conteo_palabras = 0; 
 }
 
 bool Editor::es_conectivo(string palabra){
@@ -23,8 +21,8 @@ bool Editor::es_conectivo(string palabra){
 
 string Editor::texto() const {
     string res = "";
-    for (int i = 0; i < this->_longitud; i++){
-        if(i < _longitud-1){
+    for (int i = 0; i < this->_editor.size(); i++){
+        if(i < _editor.size()-1){
         res.append(this->_editor[i]);
         res.append(" ");}
         else{
@@ -47,34 +45,30 @@ int Editor::conteo_palabras() const {
 }
 
 int Editor::longitud() const { 
-	return _longitud; 
+	return _editor.size();
 }
 
 void Editor::agregar_atras(const string& oracion) {
     string temporal = "";
-    int i = 0;
-    while( i < oracion.size()){
+    for(int i = 0; i < oracion.size(); i++){
         if(oracion[i] == ' '){
              if(!(es_conectivo(temporal))){
                 this->_conteo_palabras++;
                 this->_vocabulario.insert(temporal);
-                this->_apariciones[temporal].insert(_longitud);
+                this->_apariciones[temporal].insert(_editor.size());
             } 
-            this->_longitud++;
             this->_editor.push_back(temporal);
             temporal = "";
         }
         else{
             temporal.push_back(oracion[i]);
         }
-        i++;
     }
     if(!(es_conectivo(temporal))){
                 this->_conteo_palabras++;
                 this->_vocabulario.insert(temporal);
-                this->_apariciones[temporal].insert(_longitud);
+                this->_apariciones[temporal].insert(_editor.size());
             }
-            this->_longitud++;
             this->_editor.push_back(temporal); 
 }
 
@@ -83,7 +77,48 @@ const set<int> & Editor::buscar_palabra(const string& palabra) const {
 }
 
 void Editor::insertar_palabras(const string& oracion, int pos) {
-    /* Completar */
+    //Dividir la oracion e insertarlas guardando su posicion. Además modifica las variables internas
+    string temporal = "";
+    int cant_palabras = 0;
+    auto it = this->_editor.begin() + pos;
+    int i;
+    for(int i = 0; i < oracion.size(); i++){
+        if(oracion[i] == ' '){
+             if(!(es_conectivo(temporal))){
+                this->_conteo_palabras++;
+                this->_vocabulario.insert(temporal);
+                this->_apariciones[temporal].insert(pos);
+            } 
+            this->_editor.insert(it,temporal);
+            temporal = "";
+            it++;
+            pos++;
+        }
+        else{
+            temporal.push_back(oracion[i]);
+            cant_palabras++;
+        }
+    }
+    if(!(es_conectivo(temporal))){
+                this->_conteo_palabras++;
+                this->_vocabulario.insert(temporal);
+                this->_apariciones[temporal].insert(pos);
+            }
+            this->_editor.insert(it,temporal);
+            cant_palabras++;
+
+    //Modificar las posiciones de las palabras subsecuentes
+    
+
+    set<int> set_temporal;
+    auto it2 = this->_apariciones.find(this->_editor[pos]);
+
+    while(pos < this->_editor.size()){
+        set_temporal = it2->second;
+        for (auto iterator = set_temporal.begin(); set_temporal.size(); iterator++){
+        }
+    }
+    
 }
 
 void Editor::borrar_posicion(int pos) {
@@ -98,3 +133,12 @@ int Editor::borrar_palabra(const string& palabra) {
 void Editor::reemplazar_palabra(const string& palabra1, const string& palabra2) {
     /* Completar */
 }
+
+
+/* int main(){
+    Editor e({"el", "es", "mi"});
+    e.agregar_atras("el vecino es mi amigo");
+    e.insertar_palabras("mejor", 4);
+    cout << e.texto() << endl;
+    return 0;
+} */

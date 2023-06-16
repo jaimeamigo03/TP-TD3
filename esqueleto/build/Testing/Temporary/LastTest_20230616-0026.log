@@ -1,0 +1,39 @@
+Start testing: Jun 16 00:55 UTC
+----------------------------------------------------------
+16/16 Testing: editor_tests.reemplazar_no_conectivo_por_conectivo
+16/16 Test: editor_tests.reemplazar_no_conectivo_por_conectivo
+Command: "/workspaces/TP-TD3/esqueleto/build/editor_tests" "--gtest_filter=editor_tests.reemplazar_no_conectivo_por_conectivo" "--gtest_also_run_disabled_tests"
+Directory: /workspaces/TP-TD3/esqueleto/build
+"editor_tests.reemplazar_no_conectivo_por_conectivo" start time: Jun 16 00:55 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspaces/TP-TD3/esqueleto/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = editor_tests.reemplazar_no_conectivo_por_conectivo
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from editor_tests
+[ RUN      ] editor_tests.reemplazar_no_conectivo_por_conectivo
+/workspaces/TP-TD3/esqueleto/editor_tests.cpp:154: Failure
+Expected equality of these values:
+  e.conteo_palabras()
+    Which is: 15
+  8
+[  FAILED  ] editor_tests.reemplazar_no_conectivo_por_conectivo (0 ms)
+[----------] 1 test from editor_tests (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] editor_tests.reemplazar_no_conectivo_por_conectivo
+
+ 1 FAILED TEST
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Failed.
+"editor_tests.reemplazar_no_conectivo_por_conectivo" end time: Jun 16 00:55 UTC
+"editor_tests.reemplazar_no_conectivo_por_conectivo" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jun 16 00:55 UTC

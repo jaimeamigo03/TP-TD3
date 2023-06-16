@@ -35,9 +35,9 @@ TEST(editor_tests, test_conteo_palabras_longitud) {
 
 TEST(editor_tests, test_buscar) {
     Editor e({"el", "es", "mi"});
-    e.agregar_atras("el vecino es mi amigo");
+    e.agregar_atras("el amigo vecino es mi amigo");
 
-    ASSERT_EQ(e.buscar_palabra("amigo"), intset({4}));
+    ASSERT_EQ(e.buscar_palabra("amigo"), intset({1,5}));
 }
 
 TEST(editor_tests, test_vocabulario) {

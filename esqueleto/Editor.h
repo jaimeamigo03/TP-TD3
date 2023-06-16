@@ -59,13 +59,12 @@ private:
 
     map<string,set<int>> _apariciones;
 
-    int _longitud;
-
     int _conteo_palabras;
 
     //Funciones auxiliares
     //vector<string> oracion_a_palabras(const string& oracion);
     bool es_conectivo(string palabra);
+    
     const set<int> set_int_vacio;
     const set<string> set_string_vacio;
     
