@@ -19,6 +19,23 @@ bool Editor::es_conectivo(string palabra){
     return res;
 }
 
+void Editor::actualizar_posiciones(int pos, int cantidad){
+    int pos_inicial = pos;
+    set <int> temporal = {};
+    while(pos < this->_editor.size()){
+        if(!(es_conectivo(this->_editor[pos]))){
+        auto it = this->_apariciones.find(_editor[pos]) -> second;
+
+        for(auto it2 = it.begin(); it2 != it.end(); it2++){
+            if(*it2 < pos_inicial){
+                temporal.insert(*it2);}
+            else{
+            temporal.insert(*it2 + cantidad);}
+        }
+        this->_apariciones[_editor[pos]] = temporal;}
+        pos++;}
+    }
+
 string Editor::texto() const {
     string res = "";
     for (int i = 0; i < this->_editor.size(); i++){
@@ -90,13 +107,13 @@ void Editor::insertar_palabras(const string& oracion, int pos) {
                 this->_apariciones[temporal].insert(pos);
             } 
             this->_editor.insert(it,temporal);
+            cant_palabras++;
             temporal = "";
             it++;
             pos++;
         }
         else{
             temporal.push_back(oracion[i]);
-            cant_palabras++;
         }
     }
     if(!(es_conectivo(temporal))){
@@ -106,39 +123,90 @@ void Editor::insertar_palabras(const string& oracion, int pos) {
             }
             this->_editor.insert(it,temporal);
             cant_palabras++;
+            pos++;
 
     //Modificar las posiciones de las palabras subsecuentes
-    
-
-    set<int> set_temporal;
-    auto it2 = this->_apariciones.find(this->_editor[pos]);
-
-    while(pos < this->_editor.size()){
-        set_temporal = it2->second;
-        for (auto iterator = set_temporal.begin(); set_temporal.size(); iterator++){
-        }
-    }
-    
+    actualizar_posiciones(pos, cant_palabras);
 }
 
 void Editor::borrar_posicion(int pos) {
-    /* Completar */
+    // Pre: 0 ≤ posicion ≤ longitud()-1
+    // Post: Se elimina la palabra ubicada en esa posición del texto.
+    string palabra = _editor[pos];
+
+    if (!es_conectivo(palabra)) {
+        _conteo_palabras--;
+        _vocabulario.erase(palabra);
+    }  // Eliminar la palabra del conjunto de vocabulario si no es conectiva.
+
+    _editor.erase(next(_editor.begin(), pos));  // Eliminar la palabra en la posición indicada
+
+    auto it = _apariciones.find(palabra); // Busca la palabra especificada
+    if (it != _apariciones.end()) {
+        it->second.erase(pos);  // Eliminar la posición de la palabra en el mapa de apariciones
+        if (it->second.empty())
+            _apariciones.erase(it);  // Si no quedan más apariciones de la palabra, eliminarla del mapa
+    }
+
+    // Actualizar las posiciones de las palabras siguientes en el mapa de apariciones
+    actualizar_posiciones(pos+1, -1);
 }
 
 int Editor::borrar_palabra(const string& palabra) {
-    /* Quitar este código y completar */
-    return 0;
+    // Pre: El string palabra no tiene espacios ni signos de puntuación.
+    // Post: Se elimina la palabra indicada de todo el texto, y se devuelve la cantidad de palabras eliminadas.
+    set<int> posiciones = buscar_palabra(palabra); // Obtener las posiciones de la palabra
+
+    int cantidadBorrada = 0; // Inicializar la cantidad borrada
+
+    for (int pos : posiciones) {
+        string palabraActual = _editor[pos];
+
+        if (!es_conectivo(palabraActual)) {
+            _conteo_palabras--;
+            _vocabulario.erase(palabraActual);
+        }
+
+        _editor.erase(next(_editor.begin(), pos)); // Eliminar la palabra en la posición indicada
+
+        auto it = _apariciones.find(palabraActual); // Buscar la palabra en el mapa de apariciones
+        if (it != _apariciones.end()) {
+            it->second.erase(pos); // Eliminar la posición de la palabra en el mapa de apariciones
+            if (it->second.empty()) {
+                _apariciones.erase(it); // Si no quedan más apariciones de la palabra, eliminarla del mapa
+            }
+        }
+
+        // Actualizar las posiciones de las palabras siguientes en el mapa de apariciones
+        actualizar_posiciones(pos, 1);
+
+        cantidadBorrada += 1; // Incrementar la cantidad borrada
+    }
+
+    return cantidadBorrada; // Devolver la cantidad de palabras borradas
 }
 
 void Editor::reemplazar_palabra(const string& palabra1, const string& palabra2) {
-    /* Completar */
-}
+    set<int> posiciones_p1 = buscar_palabra(palabra1);
+    auto it_p1 = posiciones_p1.begin();
 
+    for(int pos : posiciones_p1){
+        this->_editor[pos] = palabra2;
+    }
+    if(es_conectivo(palabra1)){
+        if(es_conectivo(palabra1))
+        this->_vocabulario.insert(palabra2);
+        this->_apariciones[palabra2] = posiciones_p1;
+
+        this->_vocabulario.erase(palabra1);
+        this->_apariciones.erase(palabra1);
+    }
 
 /* int main(){
-    Editor e({"el", "es", "mi"});
-    e.agregar_atras("el vecino es mi amigo");
-    e.insertar_palabras("mejor", 4);
+    Editor e({});
+    e.agregar_atras("pin uno pin dos pin tres pin cuatro pin cinco pin seis pin siete pinocho");
+
+    e.borrar_palabra("pin");
     cout << e.texto() << endl;
     return 0;
-} */
+}    */

@@ -64,9 +64,7 @@ private:
     //Funciones auxiliares
     //vector<string> oracion_a_palabras(const string& oracion);
     bool es_conectivo(string palabra);
-    
-    const set<int> set_int_vacio;
-    const set<string> set_string_vacio;
+    void actualizar_posiciones(int pos, int cantidad);
     
     
 };
