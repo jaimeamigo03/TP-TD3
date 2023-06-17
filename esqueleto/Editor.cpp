@@ -4,6 +4,8 @@ using std::string;
 
 
 Editor::Editor(const set<string> & conectivos) {
+    // Pre: Los strings de conectivos son palabras sin espacios ni signos de puntuación. 
+    // Post: Construye un Editor vacío con un conjuto de conectivos dado.
     this->_editor = {}; //O(1)
     this->_conectivos = conectivos; //O(|conectivos|)
     this->_vocabulario = {}; //O(1)
@@ -64,26 +66,36 @@ string Editor::texto() const {
 //texto = O(1) + O(N) + O(1) = O(N). No hay peor caso, siempre va a tardar N iteraciones.
 
 const set<string>& Editor::vocabulario() const {
+    // Pre: Verdadero
+    // Post: Devuelve por referencia el conjunto de todas las palabras que aparecen alguna vez en el texto y que no están en conectivos().
     return _vocabulario; //O(1)
 }
 //vocabulario = O(1)
 
 const set<string>& Editor::conectivos() const {
+    // Pre: Verdadero
+    // Post: Devuelve por referencia el conjunto de palabras registradas como conectivos.
     return _conectivos; //O(1)
 }
 //conectivos = O(1)
 
 int Editor::conteo_palabras() const { 
+    // Pre: Verdadero
+    // Post: Devuelve la cantidad total de palabras que aparecen en el texto (contando repeticio- nes), excluyendo las que estén en contectivos().
 	return _conteo_palabras; //O(1) 
 }
 //conteo_palabras = O(1)
 
 int Editor::longitud() const { 
+    // Pre: Verdadero
+    // Post: Devuelve la cantidad total de palabras del texto (contando repeticiones).
 	return _editor.size(); //O(1)
 }
 //longitud = O(1)
 
 void Editor::agregar_atras(const string& oracion) {
+    // Pre: El string oracion es una secuencia de palabras separadas por un espacio, sin signos de puntuación y sin espacios al principio/final.
+    // Post: Se agregan todas las palabras de oracion al final del texto.
     string temporal = "";
     for(int i = 0; i < oracion.size(); i++){
         if(oracion[i] == ' '){
@@ -108,11 +120,17 @@ void Editor::agregar_atras(const string& oracion) {
 }
 
 const set<int> & Editor::buscar_palabra(const string& palabra) const {
+    // Pre: El string palabra no tiene espacios ni signos de puntuación.
+    // Post: Devuelve el conjunto de posiciones del texto donde aparece la palabra buscada.
+
     return this->_apariciones.find(palabra)->second; //O(log M)
 }
 //buscar_palabra = O(log M). Tiene este orden de complejidad, porque la funcion .find de un map tiene ese orden.
 
 void Editor::insertar_palabras(const string& oracion, int pos) {
+    // Pre: 0 ≤ posicion ≤ longitud() y oracion es una secuencia de palabras separadas por un espacio, sin signos de puntuación y sin espacios al principio/final.
+    // Post: Se inserta en orden cada una de las palabras de la oracion, a partir de la posicion indicada.
+
     //Dividir la oracion e insertarlas guardando su posicion. Además modifica las variables internas
     string temporal = "";
     int cant_palabras = 0;
@@ -197,6 +215,9 @@ int Editor::borrar_palabra(const string& palabra) {
     }
 
 void Editor::reemplazar_palabra(const string& palabra1, const string& palabra2) {
+    // Pre: Los strings palabra1 y palabra2 no tienen espacios ni signos de puntuación. 
+    // Post: Se reemplazan todas las ocurrencias en el texto de palabra1 por palabra2.
+
     set<int> posiciones_p1 = buscar_palabra(palabra1); //O(log M)
 
     for(int pos : posiciones_p1){ //O(P) * O(1) = O(P)

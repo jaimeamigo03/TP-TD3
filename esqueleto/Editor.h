@@ -71,3 +71,31 @@ private:
 
 
 #endif // __EDITOR_H__
+
+/*
+
+Invariante de representación:
+
+El vector _editor contiene las palabras del texto en el orden en que aparecen y son palabras sin espacios ni signos de puntuación y sin espacios al principio/final.
+El conjunto _conectivos contiene todas las palabras consideradas como conectivos.
+El conjunto _vocabulario contiene todas las palabras no conectivas del texto, sin repeticiones.
+El mapa _apariciones mapea cada palabra no conectiva del texto con un conjunto de posiciones en las que aparece.
+El entero _conteo_palabras indica la cantidad de palabras no conectivas en el texto.
+
+Ejemplo que cumpla: 
+_editor = ["Somos", "estudiantes", "de", "la", "Di", "Tella"]
+_conectivos = {"de", "la"}
+_vocabulario = {"Somos", "estudiantes", "Di", "Tella"}
+
+Ejemplo que no cumpla:
+_editor = ["Somos", "estudiantes", "de", "la", "Di", "Tella"]
+_conectivos = {"de", "la"}
+_vocabulario = {"Somos", "estudiantes", "de" "Di", "Tella"} No cumple con el invariante de representación ya que
+hay un conectivo dentro de _vocabulario. 
+
+Otro ejemplo que no cumple por las dudas: 
+Ejemplo que no cumpla:
+_editor = ["Somos", "estudiantes", "de", "la", "Di", "Tella."]
+No cumple con el invariante de representación ya que signos de exclamación y tampoco cumple la Pre de la función Editor. 
+
+*/
