@@ -24,11 +24,39 @@
 	ProcessorClockFrequency="2112.01"
 	>
 	<Testing>
-		<StartDateTime>Jun 18 13:15 UTC</StartDateTime>
-		<StartTestTime>1687094146</StartTestTime>
-		<TestList/>
-		<EndDateTime>Jun 18 13:15 UTC</EndDateTime>
-		<EndTestTime>1687094146</EndTestTime>
+		<StartDateTime>Jun 18 14:28 UTC</StartDateTime>
+		<StartTestTime>1687098516</StartTestTime>
+		<TestList>
+			<Test>./editor_tests.reemplazar_no_conectivo_por_conectivo</Test>
+		</TestList>
+		<Test Status="passed">
+			<Name>editor_tests.reemplazar_no_conectivo_por_conectivo</Name>
+			<Path>.</Path>
+			<FullName>./editor_tests.reemplazar_no_conectivo_por_conectivo</FullName>
+			<FullCommandLine>/workspaces/TP-TD3/esqueleto/build/editor_tests "--gtest_filter=editor_tests.reemplazar_no_conectivo_por_conectivo" "--gtest_also_run_disabled_tests"</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.0354191</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/workspaces/TP-TD3/esqueleto/build/editor_tests "--gtest_filter=editor_tests.reemplazar_no_conectivo_por_conectivo" "--gtest_also_run_disabled_tests"</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Environment">
+					<Value>#CTEST_RESOURCE_GROUP_COUNT=</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJydkE1rwzAMhu/+FTo2h8Qbuw16GHT0UOhKmp1CCK6jBjPHymylhf365aOEdjAo1UmyHsl637RzzrgaGmXcIoKjpwbkmfxXaJXGILNdnK1eJIbvDi0yyUNnbCXLCtsga6K6f8TAcfD6qpRjOWTlsDjRWmyJ8RXWIwJZ34GjsYweloCVYfLlgIfEIzatVT/Kl45KTQ41mxOVbU/MlciXcxSQXjQ8A497Bw2XPHSGMRF5PEcBa0sHZac+upPx5Bp0PYscd+0f+Hrn9Z0ih/RzC2MUDymYZuFj89A8LJ6gCdF9x04wMLGykbjPDUbl44rO7tbr/zwGr1xy+0+vcPe237+vBocmNhG/5PzTaQ==</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Jun 18 14:28 UTC</EndDateTime>
+		<EndTestTime>1687098517</EndTestTime>
 		<ElapsedMinutes>0</ElapsedMinutes>
 	</Testing>
 </Site>

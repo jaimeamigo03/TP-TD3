@@ -175,27 +175,21 @@ void Editor::borrar_posicion(int pos) {
 int Editor::borrar_palabra(const string& palabra) {
     // Pre: El string palabra no tiene espacios ni signos de puntuación.
     // Post: Se elimina la palabra indicada de todo el texto, y se devuelve la cantidad de palabras eliminadas.
-    int apariciones_totales = 0;
-
-    for(int i = 0; i < longitud();i++){
-        if(_editor[i] == palabra){
-            apariciones_totales++;
-        }
+    set<int> posiciones = buscar_palabra(palabra); //O(log M)
+    if(posiciones.size() > 0){ //O(P)
+        auto it = this->_apariciones[palabra].begin(); //O(1)
+        for(int i = 0; i < posiciones.size(); i++){ //O(P) * O(M) => O(P*M)
+            borrar_posicion(*it);
+            it = this->_apariciones[palabra].begin();
+            }
+        if (!es_conectivo(palabra)) { //O(log M)
+            _conteo_palabras = _conteo_palabras - posiciones.size(); //O(1)
+            _vocabulario.erase(palabra); //O(M)
+            }}
+    
+    return posiciones.size(); //O(1) Devolver la cantidad de palabras borradas
     }
-    if(apariciones_totales >= 1){
-    set<int> posiciones = buscar_palabra(palabra); // Obtener las posiciones de la palabra
-    auto it = this->_apariciones[palabra].begin();
-    for(int i = 0; i < posiciones.size(); i++){
-        borrar_posicion(*it);
-       it = this->_apariciones[palabra].begin();
-    }
-    if (!es_conectivo(palabra)) {
-            _conteo_palabras = _conteo_palabras - posiciones.size();
-            _vocabulario.erase(palabra);
-        }}
-
-    return apariciones_totales; // Devolver la cantidad de palabras borradas
-    }
+//borrar_palabra = O(log M) + O(P*M) + O(M) + O(1) = O(P*M)
 
 void Editor::reemplazar_palabra(const string& palabra1, const string& palabra2) {
     set<int> posiciones_p1 = buscar_palabra(palabra1); //O(log M) .find de buscar una palabra en el mapa apariciones

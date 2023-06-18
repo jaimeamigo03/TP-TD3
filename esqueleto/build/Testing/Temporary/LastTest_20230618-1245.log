@@ -1,3 +1,30 @@
-Start testing: Jun 18 13:15 UTC
+Start testing: Jun 18 14:28 UTC
 ----------------------------------------------------------
-End testing: Jun 18 13:15 UTC
+16/16 Testing: editor_tests.reemplazar_no_conectivo_por_conectivo
+16/16 Test: editor_tests.reemplazar_no_conectivo_por_conectivo
+Command: "/workspaces/TP-TD3/esqueleto/build/editor_tests" "--gtest_filter=editor_tests.reemplazar_no_conectivo_por_conectivo" "--gtest_also_run_disabled_tests"
+Directory: /workspaces/TP-TD3/esqueleto/build
+"editor_tests.reemplazar_no_conectivo_por_conectivo" start time: Jun 18 14:28 UTC
+Output:
+----------------------------------------------------------
+Running main() from /workspaces/TP-TD3/esqueleto/build/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = editor_tests.reemplazar_no_conectivo_por_conectivo
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from editor_tests
+[ RUN      ] editor_tests.reemplazar_no_conectivo_por_conectivo
+[       OK ] editor_tests.reemplazar_no_conectivo_por_conectivo (0 ms)
+[----------] 1 test from editor_tests (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"editor_tests.reemplazar_no_conectivo_por_conectivo" end time: Jun 18 14:28 UTC
+"editor_tests.reemplazar_no_conectivo_por_conectivo" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Jun 18 14:28 UTC
