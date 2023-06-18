@@ -79,8 +79,8 @@ Invariante de representación:
 El vector _editor contiene las palabras del texto en el orden en que aparecen y son palabras sin espacios ni signos de puntuación y sin espacios al principio/final.
 El conjunto _conectivos contiene todas las palabras consideradas como conectivos.
 El conjunto _vocabulario contiene todas las palabras no conectivas del texto, sin repeticiones.
-El mapa _apariciones mapea cada palabra no conectiva del texto con un conjunto de posiciones en las que aparece.
-El entero _conteo_palabras indica la cantidad de palabras no conectivas en el texto.
+El mapa _apariciones mapea cada palabra del texto, incluyendo conectivos, con el conjunto de posiciones en las que aparece.
+El entero _conteo_palabras indica la cantidad de palabras no conectivas en el texto, incluyendo repeticiones.
 
 Ejemplo que cumpla: 
 _editor = ["Somos", "estudiantes", "de", "la", "Di", "Tella"];
@@ -89,6 +89,8 @@ _vocabulario = {"Somos", "estudiantes", "Di", "Tella"};
 -apariciones = 
     Somos: {0}; 
     estudiantes: {1};
+    de: {2};
+    la; {3};
     Di: {4};
     Tella: {5};
 _conteo_palabras = 4;
@@ -100,7 +102,8 @@ _vocabulario = {"Somos", "estudiantes", "de" "Di", "Tella"}; NO cumple con el in
 _apariciones =  
     Somos: {0}; 
     estudiantes: {1};
-    de: {2}; Este conectivo no debería estar acá, sólo se mapean las NO conectivas en _apariciones. 
+    de: {2};  
+    la: {3};
     Di: {4};
     Tella: {5};
 _conteo_palabras = 5; El número debería ser 4, no 5, pero en este caso se está considerando un conectivo. 
@@ -109,6 +112,6 @@ _conteo_palabras = 5; El número debería ser 4, no 5, pero en este caso se est�
 Otro ejemplo que no cumple (por las dudas): 
 Ejemplo que no cumpla:
 _editor = ["Somos", "estudiantes", "de", "la", "Di", "Tella."]
-No cumple con el invariante de representación ya que signos de exclamación y tampoco cumple la Pre de la función Editor. 
+No cumple con el invariante de representación ya que signos de puntuación y tampoco cumple la Pre de la función Editor. 
 
 */
