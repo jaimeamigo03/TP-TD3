@@ -13,13 +13,13 @@ Editor::Editor(const set<string> & conectivos) {
 // Editor = O(1) + O(1) + O(1) O(|conectivos|) + O(1) => 4*O(1) + O(|conectivos|) => O(|conectivos|)
 
 bool Editor::es_conectivo(string palabra){
-    bool res = false; //O(1)
-    if(this->_conectivos.find(palabra) != this->_conectivos.end()){ // O(log M) * O(1) = O(log M). Peor caso, que todas las palabras en el texto sean conectivos
-        res = true; //O(1)
+    bool res = false; 
+    if(this->_conectivos.find(palabra) != this->_conectivos.end()){ 
+        res = true; 
     }
-    return res; //O(1)
+    return res; 
 }
-// es_conectivo = O(1) + O(log M) + O(1) => 2*O(1) + O(log M) => O(log M)
+// es_conectivo = O(1), en el enunciado dice que se puede asumir que verificar que una palabra sea conectivo, tiene orden constante.
 
 void Editor::actualizar_posiciones(int pos, int cantidad){
         set <int> temporal = {}; //O(1)
@@ -86,11 +86,11 @@ void Editor::agregar_atras(const string& oracion) {
     string temporal = ""; // O(1)
     for(int i = 0; i < oracion.size(); i++){ //O(|oracion|) * O(log M)
         if(oracion[i] == ' '){ //O(1)
-             if(!(es_conectivo(temporal))){ //O(log M)
+             if(!(es_conectivo(temporal))){ //O(1)
                 this->_conteo_palabras++; //O(1)
                 this->_vocabulario.insert(temporal); //O(1)
             } 
-            this->_apariciones[temporal].insert(_editor.size()); //O(1)
+            this->_apariciones[temporal].insert(_editor.size()); //O(log M)
             this->_editor.push_back(temporal); //O(1)
             temporal = ""; //O(1)
         }
@@ -98,11 +98,11 @@ void Editor::agregar_atras(const string& oracion) {
             temporal.push_back(oracion[i]); //O(1)
         }
     }
-    if(!(es_conectivo(temporal))){ //O(log M)
+    if(!(es_conectivo(temporal))){ //O(1)
                 this->_conteo_palabras++; //O(1)
                 this->_vocabulario.insert(temporal); //O(1)
             }
-    this->_apariciones[temporal].insert(_editor.size()); //O(1)
+    this->_apariciones[temporal].insert(_editor.size()); //O(log M)
     this->_editor.push_back(temporal); //O(1)
 }
 //agregar_atras = O(1) + O(|oracion|) * O(log M) + O(log M) + 2 * O(1) => O(|oracion|) * O(log M)
@@ -119,10 +119,10 @@ void Editor::insertar_palabras(const string& oracion, int pos) {
     auto it = this->_editor.begin() + pos; //O(1)
     for(int i = 0; i < oracion.size(); i++){ //O(|oracion|)
         if(oracion[i] == ' '){ //O(1)
-             if(!(es_conectivo(temporal))){ //O(log M)
+             if(!(es_conectivo(temporal))){ //O(1)
                 this->_conteo_palabras++; //O(1)
                 this->_vocabulario.insert(temporal); //O(1)
-                this->_apariciones[temporal].insert(pos); //O(1)
+                this->_apariciones[temporal].insert(pos); //O(log M)
             } 
             this->_editor.insert(it,temporal); //O(1)
             cant_palabras++; //O(1)
@@ -134,11 +134,11 @@ void Editor::insertar_palabras(const string& oracion, int pos) {
             temporal.push_back(oracion[i]); //O(1)
         }
     }
-    if(!(es_conectivo(temporal))){ //O(log M)
+    if(!(es_conectivo(temporal))){ //O(1)
                 this->_conteo_palabras++; //O(1)
                 this->_vocabulario.insert(temporal); //O(1)
             }
-            this->_apariciones[temporal].insert(pos); //O(1)
+            this->_apariciones[temporal].insert(pos); //O(log M)
             this->_editor.insert(it,temporal); //O(1)
             cant_palabras++; //O(1)
             pos++; //O(1)
@@ -153,7 +153,7 @@ void Editor::borrar_posicion(int pos) {
     // Post: Se elimina la palabra ubicada en esa posición del texto.
     string palabra = _editor[pos]; //O(1)
 
-    if (!es_conectivo(palabra)) { //O(log M), peor caso: entra al if => tiene O(M)
+    if (!es_conectivo(palabra)) { //O(1), peor caso: entra al if => tiene O(M)
         _conteo_palabras--; //O(1)
         _vocabulario.erase(palabra); //O(M)
     }  // Eliminar la palabra del conjunto de vocabulario si no es conectiva.
@@ -170,7 +170,7 @@ void Editor::borrar_posicion(int pos) {
     // Actualizar las posiciones de las palabras siguientes en el mapa de apariciones
     actualizar_posiciones(pos, -1); //O(M*P)
 }
-//borrar_posicion = O(1) + O(M) + O(M) + O(log M) + O(M) + O(P) => O(M)
+//borrar_posicion = O(1) + O(M) + O(M) + O(log M) + O(M) + O(P) + O(M*P) => O(M*P)
 
 int Editor::borrar_palabra(const string& palabra) {
     // Pre: El string palabra no tiene espacios ni signos de puntuación.
@@ -178,18 +178,18 @@ int Editor::borrar_palabra(const string& palabra) {
     set<int> posiciones = buscar_palabra(palabra); //O(log M)
     if(posiciones.size() > 0){ //O(P)
         auto it = this->_apariciones[palabra].begin(); //O(1)
-        for(int i = 0; i < posiciones.size(); i++){ //O(P) * O(M) => O(P*M)
-            borrar_posicion(*it);
-            it = this->_apariciones[palabra].begin();
+        for(int i = 0; i < posiciones.size(); i++){ //O(P) * [O(M*P) + O(log M)] => O(P) * O(P*M)
+            borrar_posicion(*it); //O(M*P)
+            it = this->_apariciones[palabra].begin();//O(log M)
             }
-        if (!es_conectivo(palabra)) { //O(log M)
+        if (!es_conectivo(palabra)) { //O(1)
             _conteo_palabras = _conteo_palabras - posiciones.size(); //O(1)
             _vocabulario.erase(palabra); //O(M)
             }}
     
     return posiciones.size(); //O(1) Devolver la cantidad de palabras borradas
     }
-//borrar_palabra = O(log M) + O(P*M) + O(M) + O(1) = O(P*M)
+//borrar_palabra = O(log M) + [O(P) * O(P*M)] + O(M) + O(1) => O(P) * O(P*M)
 
 void Editor::reemplazar_palabra(const string& palabra1, const string& palabra2) {
     set<int> posiciones_p1 = buscar_palabra(palabra1); //O(log M) .find de buscar una palabra en el mapa apariciones
@@ -198,26 +198,26 @@ void Editor::reemplazar_palabra(const string& palabra1, const string& palabra2) 
         this->_editor[pos] = palabra2; //O(1) Reemplazar una palabra en un vector tiene O(1)
     }
 
-    if(es_conectivo(palabra1)){ //O(log M) + O(P) * O(log M) = O(P) * O(log M), porque O(P) * O(log M) crece mas rápido que O(log M) solo
+    if(es_conectivo(palabra1)){ //O(1) + O(P) * O(log M) => O(P) * O(log M)
         
         for(int pos : posiciones_p1){ //O(P) * (O(1) + O(Log M)) = O(P) * O(Log M))
                 this->_apariciones[palabra2].insert(pos); //O(1)
                 this->_apariciones[palabra1].erase(pos); //O(log M)
             }
         
-        if(!(es_conectivo(palabra2))){ //O(log M)
+        if(!(es_conectivo(palabra2))){ //O(1)
             this->_conteo_palabras = this->_conteo_palabras + posiciones_p1.size(); //O(1)
             this->_vocabulario.insert(palabra2); //O(1)
         }
     }
     
-    else{ //O(P) + O(log M) + O(log M) + O(log M) = O(P)
+    else{ //O(P) + O(log M) + O(log M) + O(1) = O(P)
         for(int pos : posiciones_p1){  //O(P)
                 this->_apariciones[palabra2].insert(pos); //O(1)
             }
             this->_vocabulario.erase(palabra1); //O(log M)
             this->_apariciones.erase(palabra1); //O(log M)
-        if(es_conectivo(palabra2)){ //O(log M)
+        if(es_conectivo(palabra2)){ //O(1)
             this->_conteo_palabras = this->_conteo_palabras - posiciones_p1.size(); //O(1)      
         }
         }
