@@ -1,0 +1,5 @@
+if(EXISTS "/workspaces/TP-TD3/esqueleto/build/editor_tests[1]_tests.cmake")
+  include("/workspaces/TP-TD3/esqueleto/build/editor_tests[1]_tests.cmake")
+else()
+  add_test(editor_tests_NOT_BUILT editor_tests_NOT_BUILT)
+endif()

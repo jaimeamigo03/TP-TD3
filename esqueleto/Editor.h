@@ -4,6 +4,7 @@
 #include <set>
 #include <string>
 #include <vector>
+#include <map>
 /* agregar includes que sean necesarios */
 
 using namespace std;
@@ -45,9 +46,8 @@ public:
     // reemplaza una palabra por otra    
     void reemplazar_palabra(const string& palabra, const string& reemplazo);    // O(log M + P * log(P))
 
+
 private:
-    /* Completar */
-    // conjuntos vacíos para devolver por referncia
 
     vector<string> _editor;
 
@@ -55,11 +55,84 @@ private:
 
     set<string> _vocabulario;
 
-    int _palabras_totales;  
+    map<string,set<int>> _apariciones;
 
-    int _longitud;
+    int _conteo_palabras;
+
+    //Funciones auxiliares
+    bool es_conectivo(string palabra);
+    void actualizar_posiciones(int pos, int cantidad);
+    
     
 };
 
 
 #endif // __EDITOR_H__
+
+/*
+
+Invariante de representación (en español):
+
+El vector _editor contiene las palabras del texto en el orden en que aparecen y son palabras sin espacios ni signos de puntuación y sin espacios al principio/final.
+El conjunto _conectivos contiene todas las palabras consideradas como conectivos.
+El conjunto _vocabulario contiene todas las palabras no conectivas del texto, sin repeticiones.
+El mapa _apariciones mapea cada palabra del texto, incluyendo conectivos, con el conjunto de posiciones en las que aparece.
+El entero _conteo_palabras indica la cantidad de palabras no conectivas en el texto, incluyendo repeticiones.
+
+Ejemplo que cumpla: 
+_editor = ["Somos", "estudiantes", "de", "la", "Di", "Tella"];
+_conectivos = {"de", "la"};
+_vocabulario = {"Somos", "estudiantes", "Di", "Tella"};
+_apariciones = 
+    Somos: {0}; 
+    estudiantes: {1};
+    de: {2};
+    la; {3};
+    Di: {4};
+    Tella: {5};
+_conteo_palabras = 4;
+
+Ejemplo que no cumpla:
+_editor = ["Somos", "estudiantes", "de", "la", "Di", "Tella"];
+_conectivos = {"de", "la"};
+_vocabulario = {"Somos", "estudiantes", "de" "Di", "Tella"}; NO cumple con el invariante de representación ya que hay un conectivo dentro de _vocabulario. 
+_apariciones =  
+    Somos: {0}; 
+    estudiantes: {1};
+    de: {2};  
+    la: {3};
+    Di: {4};
+    Tella: {5};
+_conteo_palabras = 5; El número debería ser 4, no 5, pero en este caso se está considerando un conectivo. 
+
+
+Otro ejemplo que no cumple (por las dudas): 
+Ejemplo que no cumpla:
+_editor = ["Somos", "estudiantes", "de", "la", "Di", "Tella."]
+No cumple con el invariante de representación ya que signos de puntuación y tampoco cumple la Pre de la función Editor. 
+
+
+Invariante de representación (lógica formal):
+
+Rep(e : estr) [
+
+              |_editor|-1
+_conteo_palabras = ∑  β(_editor[i] ∉ _conectivos) ∧
+                  i=0
+
+(∀x:string)(x ∈ _apariciones => (∀i:int)(i ∈ _apariciones[x] => 0 ≤ i < |editor|)) ∧
+
+(∀x:string)(x ∈ _vocabulario => x ∉ _conectivos) ∧
+
+(∀m,n:string)(m,n ∈ _vocabulario => m != n) ∧
+
+(|_vocabulario| = |_apariciones|) ∧
+
+_conectivos = conectivos ∧
+
+(∀x: int)(0 ≤ x < |_editor| => _editor[x] ∈ (_vocabulario ∨_conectivos)) ∧
+
+(∀p:string) (p ∈ _apariciones => |_apariciones[p]| > 0) 
+            
+            ] */
+
